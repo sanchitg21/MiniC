@@ -1,0 +1,79 @@
+REMAINING:
+
+1. ARRAY
+2. FUNCTION CALL AND DECLARATION
+3. PRINTF (Done)
+4. SWITCH-CASE (If only required)
+5. RETURN SINGLE ARRAY ELEMENT
+6. VOID CHANGES
+7. STRING CHANGES
+8. FUNC_DECL
+9. ARR_DECL
+10. IF
+11. Func_Call (change karna hoga)
+12. 2D ARRAY BHI DAALNA HAIN
+
+GRAMMAR:
+
+Begin -> Func_Decl Begin | Func_Decl					
+
+Type -> INT | FLOAT | CHAR | VOID
+
+Func_Decl -> Type ID '(' Para_List ')' '{' Stmt_List '}'
+		| Type ID '(' ')' '{' Stmt_List '}'
+
+Para_List  -> Para ',' Para_List | Para
+
+Para -> Type ID
+
+Stmt_List -> Stmt Stmt_List | Stmt | '{' Stmt_List '}'
+
+Stmt -> Decl | Control | Return | ';' | Print | Func_Call | Arr_Decl
+
+Control -> If | While | For 
+
+Return -> RETURN ID ';' |
+	RETURN CONST ';' |
+	RETURN ';'
+	
+CONST -> INT_CONST | FLOAT_CONST | CHAR_CONST
+
+If -> IF '(' Expr ')' '{' Stmt_List '}'
+
+For -> FOR '(' Decl Expr ';' ASSGN ')' '{' Stmt_List '}'
+
+While -> WHILE '(' Expr ')' '{' Stmt_List '}'
+
+Print -> PRINTF '(' STRING ')' ';'
+	| PRINTF '(' STRING ',' Var_List ')' ';'
+
+Var_List -> ID | ID ',' Var_List | //(this is empty -> epsilon)
+
+Expr -> ID | Expr '+ - * / < > <= >=' Expr | 
+	'(' Expr ')' | CONST
+
+Decl -> Type ASSGN ';'
+	| ASSGN ';'
+
+ASSGN -> ID '=' EXPR| ID | ID '=' EXPR ',' ASSGN
+	| ID ',' ASSGN
+
+Func_Call -> Type ID '=' ID '(' Var_List ')' ';'
+		| ID '(' Var_List ')'
+		| ID '=' ID '(' Var_List ')' ';'
+
+Arr_Decl -> Type ARR ';'
+        | Type ARR '=' '{' Const_List '}' ';'
+		| Type ARR2D ';' | Type ARR2D '=' '{' Const_List2 '}' ';'
+
+Const_List -> int_list | float_list | char_list
+
+Const_List2 -> '{' Const_List '}' | '{' Const_List '}' ';' Const_List2
+
+int_list -> INT_CONST ',' int_list | INT_CONST | ID
+
+float_list -> FLOAT_CONST ',' float_list | FLOAT_LIST | ID
+
+char_list -> CHAR_CONST ',' char_list | CHAR_LIST | ID
+
+
